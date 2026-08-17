@@ -21038,6 +21038,11 @@
               "$ref": "#/components/schemas/SearchSuggestions_History"
             }
           },
+          "query": {
+            "type": "string",
+            "description": "search query the suggestions were produced for",
+            "example": "moby dick"
+          },
           "suggestions": {
             "type": "array",
             "description": "Suggested search queries",
