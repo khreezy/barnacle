@@ -8402,7 +8402,7 @@
         "description": "Retrieves single searchResult by id.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -8505,7 +8505,7 @@
         "description": "Retrieves albums relationship.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -8617,7 +8617,7 @@
         "description": "Retrieves artists relationship.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -8729,7 +8729,7 @@
         "description": "Retrieves playlists relationship.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -8841,7 +8841,7 @@
         "description": "Retrieves topHits relationship.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -8953,7 +8953,7 @@
         "description": "Retrieves tracks relationship.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -9065,7 +9065,7 @@
         "description": "Retrieves videos relationship.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -9177,7 +9177,7 @@
         "description": "Retrieves single searchSuggestion by id.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -9280,7 +9280,7 @@
         "description": "Retrieves directHits relationship.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",

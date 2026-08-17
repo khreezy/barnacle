@@ -61,7 +61,7 @@ Retrieves single searchResult by id.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Search query string used as the resource identifier | [required] |
+**id** | **String** | Opaque search-result identifier returned by the collection endpoint; not the search query itself | [required] |
 **explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
 **country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |
 **include** | Option<[**Vec<String>**](String.md)> | Allows the client to customize which related resources should be returned. Available options: albums, artists, playlists, topHits, tracks, videos |  |
@@ -94,7 +94,7 @@ Retrieves albums relationship.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Search query string used as the resource identifier | [required] |
+**id** | **String** | Opaque search-result identifier returned by the collection endpoint; not the search query itself | [required] |
 **explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
 **page_cursor** | Option<**String**> | Server-generated cursor value pointing a certain page of items. Optional, targets first page if not specified |  |
 **country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |
@@ -128,7 +128,7 @@ Retrieves artists relationship.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Search query string used as the resource identifier | [required] |
+**id** | **String** | Opaque search-result identifier returned by the collection endpoint; not the search query itself | [required] |
 **explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
 **page_cursor** | Option<**String**> | Server-generated cursor value pointing a certain page of items. Optional, targets first page if not specified |  |
 **country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |
@@ -162,7 +162,7 @@ Retrieves playlists relationship.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Search query string used as the resource identifier | [required] |
+**id** | **String** | Opaque search-result identifier returned by the collection endpoint; not the search query itself | [required] |
 **explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
 **page_cursor** | Option<**String**> | Server-generated cursor value pointing a certain page of items. Optional, targets first page if not specified |  |
 **country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |
@@ -196,7 +196,7 @@ Retrieves tracks relationship.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Search query string used as the resource identifier | [required] |
+**id** | **String** | Opaque search-result identifier returned by the collection endpoint; not the search query itself | [required] |
 **explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
 **page_cursor** | Option<**String**> | Server-generated cursor value pointing a certain page of items. Optional, targets first page if not specified |  |
 **country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |
@@ -230,7 +230,7 @@ Retrieves videos relationship.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Search query string used as the resource identifier | [required] |
+**id** | **String** | Opaque search-result identifier returned by the collection endpoint; not the search query itself | [required] |
 **explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
 **page_cursor** | Option<**String**> | Server-generated cursor value pointing a certain page of items. Optional, targets first page if not specified |  |
 **country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |
@@ -264,7 +264,7 @@ Retrieves topHits relationship.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Search query string used as the resource identifier | [required] |
+**id** | **String** | Opaque search-result identifier returned by the collection endpoint; not the search query itself | [required] |
 **explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
 **page_cursor** | Option<**String**> | Server-generated cursor value pointing a certain page of items. Optional, targets first page if not specified |  |
 **country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |
