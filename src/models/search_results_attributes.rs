@@ -17,6 +17,9 @@ pub struct SearchResultsAttributes {
     /// 'did you mean' prompt
     #[serde(rename = "didYouMean", skip_serializing_if = "Option::is_none")]
     pub did_you_mean: Option<String>,
+    /// search query the results were produced for
+    #[serde(rename = "query", skip_serializing_if = "Option::is_none")]
+    pub query: Option<String>,
     /// search request unique tracking number
     #[serde(rename = "trackingId")]
     pub tracking_id: String,
@@ -26,6 +29,7 @@ impl SearchResultsAttributes {
     pub fn new(tracking_id: String) -> SearchResultsAttributes {
         SearchResultsAttributes {
             did_you_mean: None,
+            query: None,
             tracking_id,
         }
     }

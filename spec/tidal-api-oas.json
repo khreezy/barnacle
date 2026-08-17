@@ -20916,6 +20916,11 @@
             "description": "'did you mean' prompt",
             "example": "beatles"
           },
+          "query": {
+            "type": "string",
+            "description": "search query the results were produced for",
+            "example": "moby dick"
+          },
           "trackingId": {
             "type": "string",
             "description": "search request unique tracking number",
