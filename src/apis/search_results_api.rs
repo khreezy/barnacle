@@ -18,6 +18,24 @@ use std::sync::Arc;
 
 #[async_trait]
 pub trait SearchResultsApi: Send + Sync {
+    /// GET /searchResults
+    ///
+    /// Retrieves multiple searchResults by available filters.
+    async fn get_search_results<
+        'page_cursor,
+        'explicit_filter,
+        'country_code,
+        'include,
+        'filter_left_square_bracket_query_right_square_bracket,
+    >(
+        &self,
+        page_cursor: Option<&'page_cursor str>,
+        explicit_filter: Option<&'explicit_filter str>,
+        country_code: Option<&'country_code str>,
+        include: Option<Vec<String>>,
+        filter_left_square_bracket_query_right_square_bracket: Vec<String>,
+    ) -> Result<models::SearchResultsMultiResourceDataDocument, Error<GetSearchResultsError>>;
+
     /// GET /searchResults/{id}
     ///
     /// Retrieves single searchResult by id.
@@ -160,6 +178,118 @@ impl SearchResultsApiClient {
 
 #[async_trait]
 impl SearchResultsApi for SearchResultsApiClient {
+    /// Retrieves multiple searchResults by available filters.
+    async fn get_search_results<
+        'page_cursor,
+        'explicit_filter,
+        'country_code,
+        'include,
+        'filter_left_square_bracket_query_right_square_bracket,
+    >(
+        &self,
+        page_cursor: Option<&'page_cursor str>,
+        explicit_filter: Option<&'explicit_filter str>,
+        country_code: Option<&'country_code str>,
+        include: Option<Vec<String>>,
+        filter_left_square_bracket_query_right_square_bracket: Vec<String>,
+    ) -> Result<models::SearchResultsMultiResourceDataDocument, Error<GetSearchResultsError>> {
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/searchResults", local_var_configuration.base_path);
+        let mut local_var_req_builder =
+            local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
+
+        if let Some(ref param_value) = page_cursor {
+            local_var_req_builder =
+                local_var_req_builder.query(&[("page[cursor]", &param_value.to_string())]);
+        }
+        if let Some(ref param_value) = explicit_filter {
+            local_var_req_builder =
+                local_var_req_builder.query(&[("explicitFilter", &param_value.to_string())]);
+        }
+        if let Some(ref param_value) = country_code {
+            local_var_req_builder =
+                local_var_req_builder.query(&[("countryCode", &param_value.to_string())]);
+        }
+        if let Some(ref param_value) = include {
+            local_var_req_builder = match "multi" {
+                "multi" => local_var_req_builder.query(
+                    &param_value
+                        .into_iter()
+                        .map(|p| ("include".to_owned(), p.to_string()))
+                        .collect::<Vec<(std::string::String, std::string::String)>>(),
+                ),
+                _ => local_var_req_builder.query(&[(
+                    "include",
+                    &param_value
+                        .into_iter()
+                        .map(|p| p.to_string())
+                        .collect::<Vec<String>>()
+                        .join(",")
+                        .to_string(),
+                )]),
+            };
+        }
+        local_var_req_builder = match "multi" {
+            "multi" => local_var_req_builder.query(
+                &filter_left_square_bracket_query_right_square_bracket
+                    .into_iter()
+                    .map(|p| ("filter[query]".to_owned(), p.to_string()))
+                    .collect::<Vec<(std::string::String, std::string::String)>>(),
+            ),
+            _ => local_var_req_builder.query(&[(
+                "filter[query]",
+                &filter_left_square_bracket_query_right_square_bracket
+                    .into_iter()
+                    .map(|p| p.to_string())
+                    .collect::<Vec<String>>()
+                    .join(",")
+                    .to_string(),
+            )]),
+        };
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder
+                .header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+        if let Some(ref local_var_token) = local_var_configuration.oauth_access_token {
+            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
+        };
+        if let Some(ref local_var_token) = local_var_configuration.oauth_access_token {
+            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
+        };
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content_type = local_var_resp
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("application/octet-stream");
+        let local_var_content_type = super::ContentType::from(local_var_content_type);
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            match local_var_content_type {
+                ContentType::Json => serde_path_to_error::deserialize(&mut serde_json::Deserializer::from_str(&local_var_content)).map_err(Error::from),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::SearchResultsMultiResourceDataDocument`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::SearchResultsMultiResourceDataDocument`")))),
+            }
+        } else {
+            let local_var_entity: Option<GetSearchResultsError> =
+                serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent {
+                status: local_var_status,
+                content: local_var_content,
+                entity: local_var_entity,
+            };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
     /// Retrieves single searchResult by id.
     async fn get_search_result<'id, 'explicit_filter, 'country_code, 'include>(
         &self,
@@ -853,6 +983,21 @@ impl SearchResultsApi for SearchResultsApiClient {
             Err(Error::ResponseError(local_var_error))
         }
     }
+}
+
+/// struct for typed errors of method [`SearchResultsApi::get_search_results`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetSearchResultsError {
+    Status400(models::Default400ResponseBody),
+    Status404(models::Default404ResponseBody),
+    Status405(models::Default405ResponseBody),
+    Status406(models::Default406ResponseBody),
+    Status415(models::Default415ResponseBody),
+    Status429(models::Default429ResponseBody),
+    Status500(models::Default500ResponseBody),
+    Status503(models::Default503ResponseBody),
+    UnknownValue(serde_json::Value),
 }
 
 /// struct for typed errors of method [`SearchResultsApi::get_search_result`]
