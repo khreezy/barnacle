@@ -21,7 +21,7 @@ Retrieves single searchSuggestion by id.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Search query string used as the resource identifier | [required] |
+**id** | **String** | Opaque search-result identifier returned by the collection endpoint; not the search query itself | [required] |
 **explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
 **country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |
 **include** | Option<[**Vec<String>**](String.md)> | Allows the client to customize which related resources should be returned. Available options: directHits |  |
@@ -54,7 +54,7 @@ Retrieves directHits relationship.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Search query string used as the resource identifier | [required] |
+**id** | **String** | Opaque search-result identifier returned by the collection endpoint; not the search query itself | [required] |
 **explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
 **country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |
 **include** | Option<[**Vec<String>**](String.md)> | Allows the client to customize which related resources should be returned. Available options: directHits |  |

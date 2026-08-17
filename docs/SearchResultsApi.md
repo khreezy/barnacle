@@ -4,6 +4,7 @@ All URIs are relative to *https://openapi.tidal.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**get_search_results**](SearchResultsApi.md#get_search_results) | **GET** /searchResults | Get multiple searchResults.
 [**get_search_result**](SearchResultsApi.md#get_search_result) | **GET** /searchResults/{id} | Get single searchResult.
 [**get_search_result_albums**](SearchResultsApi.md#get_search_result_albums) | **GET** /searchResults/{id}/relationships/albums | Get albums relationship (\"to-many\").
 [**get_search_result_artists**](SearchResultsApi.md#get_search_result_artists) | **GET** /searchResults/{id}/relationships/artists | Get artists relationship (\"to-many\").
@@ -12,6 +13,40 @@ Method | HTTP request | Description
 [**get_search_result_videos**](SearchResultsApi.md#get_search_result_videos) | **GET** /searchResults/{id}/relationships/videos | Get videos relationship (\"to-many\").
 [**get_search_results_top_hits**](SearchResultsApi.md#get_search_results_top_hits) | **GET** /searchResults/{id}/relationships/topHits | Get topHits relationship (\"to-many\").
 
+
+
+## get_search_results
+
+> models::SearchResultsMultiResourceDataDocument get_search_results(page_cursor, explicit_filter, country_code, include, filter_left_square_bracket_query_right_square_bracket)
+Get multiple searchResults.
+
+Retrieves multiple searchResults by available filters.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**page_cursor** | Option<**String**> | Server-generated cursor value pointing a certain page of items. Optional, targets first page if not specified |  |
+**explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
+**country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |
+**include** | Option<[**Vec<String>**](String.md)> | Allows the client to customize which related resources should be returned. Available options: albums, artists, playlists, topHits, tracks, videos |  |
+**filter_left_square_bracket_query_right_square_bracket** | [**Vec<String>**](String.md) | Search query | [required] |
+
+### Return type
+
+[**models::SearchResultsMultiResourceDataDocument**](SearchResults_Multi_Resource_Data_Document.md)
+
+### Authorization
+
+[Authorization_Code_PKCE](../README.md#Authorization_Code_PKCE), [Client_Credentials](../README.md#Client_Credentials)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
 ## get_search_result
@@ -26,7 +61,7 @@ Retrieves single searchResult by id.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Search query string used as the resource identifier | [required] |
+**id** | **String** | Opaque search-result identifier returned by the collection endpoint; not the search query itself | [required] |
 **explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
 **country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |
 **include** | Option<[**Vec<String>**](String.md)> | Allows the client to customize which related resources should be returned. Available options: albums, artists, playlists, topHits, tracks, videos |  |
@@ -59,7 +94,7 @@ Retrieves albums relationship.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Search query string used as the resource identifier | [required] |
+**id** | **String** | Opaque search-result identifier returned by the collection endpoint; not the search query itself | [required] |
 **explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
 **page_cursor** | Option<**String**> | Server-generated cursor value pointing a certain page of items. Optional, targets first page if not specified |  |
 **country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |
@@ -93,7 +128,7 @@ Retrieves artists relationship.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Search query string used as the resource identifier | [required] |
+**id** | **String** | Opaque search-result identifier returned by the collection endpoint; not the search query itself | [required] |
 **explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
 **page_cursor** | Option<**String**> | Server-generated cursor value pointing a certain page of items. Optional, targets first page if not specified |  |
 **country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |
@@ -127,7 +162,7 @@ Retrieves playlists relationship.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Search query string used as the resource identifier | [required] |
+**id** | **String** | Opaque search-result identifier returned by the collection endpoint; not the search query itself | [required] |
 **explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
 **page_cursor** | Option<**String**> | Server-generated cursor value pointing a certain page of items. Optional, targets first page if not specified |  |
 **country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |
@@ -161,7 +196,7 @@ Retrieves tracks relationship.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Search query string used as the resource identifier | [required] |
+**id** | **String** | Opaque search-result identifier returned by the collection endpoint; not the search query itself | [required] |
 **explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
 **page_cursor** | Option<**String**> | Server-generated cursor value pointing a certain page of items. Optional, targets first page if not specified |  |
 **country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |
@@ -195,7 +230,7 @@ Retrieves videos relationship.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Search query string used as the resource identifier | [required] |
+**id** | **String** | Opaque search-result identifier returned by the collection endpoint; not the search query itself | [required] |
 **explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
 **page_cursor** | Option<**String**> | Server-generated cursor value pointing a certain page of items. Optional, targets first page if not specified |  |
 **country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |
@@ -229,7 +264,7 @@ Retrieves topHits relationship.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Search query string used as the resource identifier | [required] |
+**id** | **String** | Opaque search-result identifier returned by the collection endpoint; not the search query itself | [required] |
 **explicit_filter** | Option<**String**> | Explicit filter |  |[default to INCLUDE]
 **page_cursor** | Option<**String**> | Server-generated cursor value pointing a certain page of items. Optional, targets first page if not specified |  |
 **country_code** | Option<**String**> | ISO 3166-1 alpha-2 country code |  |

@@ -8283,13 +8283,126 @@
         }
       }
     },
+    "/searchResults": {
+      "get": {
+        "operationId": "getSearchResults",
+        "description": "Retrieves multiple searchResults by available filters.",
+        "parameters": [
+          {
+            "description": "Server-generated cursor value pointing a certain page of items. Optional, targets first page if not specified",
+            "in": "query",
+            "name": "page[cursor]",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Explicit filter",
+            "example": "INCLUDE/EXCLUDE",
+            "in": "query",
+            "name": "explicitFilter",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["INCLUDE", "EXCLUDE"],
+              "default": "INCLUDE"
+            }
+          },
+          {
+            "description": "ISO 3166-1 alpha-2 country code",
+            "example": "US",
+            "in": "query",
+            "name": "countryCode",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Allows the client to customize which related resources should be returned. Available options: albums, artists, playlists, topHits, tracks, videos",
+            "example": "tracks",
+            "in": "query",
+            "name": "include",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": "tracks"
+              }
+            }
+          },
+          {
+            "description": "Search query",
+            "example": "moby dick",
+            "in": "query",
+            "name": "filter[query]",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": "moby dick"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResults_Multi_Resource_Data_Document"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "$ref": "#/components/responses/Default400Response"
+          },
+          "404": {
+            "$ref": "#/components/responses/Default404Response"
+          },
+          "405": {
+            "$ref": "#/components/responses/Default405Response"
+          },
+          "406": {
+            "$ref": "#/components/responses/Default406Response"
+          },
+          "415": {
+            "$ref": "#/components/responses/Default415Response"
+          },
+          "429": {
+            "$ref": "#/components/responses/Default429Response"
+          },
+          "500": {
+            "$ref": "#/components/responses/Default500Response"
+          },
+          "503": {
+            "$ref": "#/components/responses/Default503Response"
+          }
+        },
+        "security": [
+          {
+            "Client_Credentials": []
+          },
+          {
+            "Authorization_Code_PKCE": ["r_usr", "search.read"]
+          }
+        ],
+        "summary": "Get multiple searchResults.",
+        "tags": ["searchResults"]
+      }
+    },
     "/searchResults/{id}": {
       "get": {
         "operationId": "getSearchResult",
         "description": "Retrieves single searchResult by id.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -8392,7 +8505,7 @@
         "description": "Retrieves albums relationship.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -8504,7 +8617,7 @@
         "description": "Retrieves artists relationship.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -8616,7 +8729,7 @@
         "description": "Retrieves playlists relationship.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -8728,7 +8841,7 @@
         "description": "Retrieves topHits relationship.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -8840,7 +8953,7 @@
         "description": "Retrieves tracks relationship.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -8952,7 +9065,7 @@
         "description": "Retrieves videos relationship.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -9064,7 +9177,7 @@
         "description": "Retrieves single searchSuggestion by id.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -9167,7 +9280,7 @@
         "description": "Retrieves directHits relationship.",
         "parameters": [
           {
-            "description": "Search query string used as the resource identifier",
+            "description": "Opaque search-result identifier returned by the searchResults or searchSuggestions collection; not the search query itself",
             "example": "hello",
             "in": "path",
             "name": "id",
@@ -20802,6 +20915,11 @@
             "type": "string",
             "description": "'did you mean' prompt",
             "example": "beatles"
+          },
+          "query": {
+            "type": "string",
+            "description": "search query the results were produced for",
+            "example": "moby dick"
           },
           "trackingId": {
             "type": "string",
