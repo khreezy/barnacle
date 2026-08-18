@@ -9058,6 +9058,119 @@
         }
       }
     },
+    "/searchSuggestions": {
+      "get": {
+        "operationId": "getSearchSuggestions",
+        "description": "Retrieves multiple searchSuggestions by available filters.",
+        "parameters": [
+          {
+            "description": "Server-generated cursor value pointing a certain page of items. Optional, targets first page if not specified",
+            "in": "query",
+            "name": "page[cursor]",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Explicit filter",
+            "example": "INCLUDE/EXCLUDE",
+            "in": "query",
+            "name": "explicitFilter",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["INCLUDE", "EXCLUDE"],
+              "default": "INCLUDE"
+            }
+          },
+          {
+            "description": "ISO 3166-1 alpha-2 country code",
+            "example": "US",
+            "in": "query",
+            "name": "countryCode",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Allows the client to customize which related resources should be returned. Available options: directHits",
+            "example": "directHits",
+            "in": "query",
+            "name": "include",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": "directHits"
+              }
+            }
+          },
+          {
+            "description": "Search query",
+            "example": "moby dick",
+            "in": "query",
+            "name": "filter[query]",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": "moby dick"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchSuggestions_Multi_Resource_Data_Document"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "$ref": "#/components/responses/Default400Response"
+          },
+          "404": {
+            "$ref": "#/components/responses/Default404Response"
+          },
+          "405": {
+            "$ref": "#/components/responses/Default405Response"
+          },
+          "406": {
+            "$ref": "#/components/responses/Default406Response"
+          },
+          "415": {
+            "$ref": "#/components/responses/Default415Response"
+          },
+          "429": {
+            "$ref": "#/components/responses/Default429Response"
+          },
+          "500": {
+            "$ref": "#/components/responses/Default500Response"
+          },
+          "503": {
+            "$ref": "#/components/responses/Default503Response"
+          }
+        },
+        "security": [
+          {
+            "Client_Credentials": []
+          },
+          {
+            "Authorization_Code_PKCE": []
+          }
+        ],
+        "summary": "Get multiple searchSuggestions.",
+        "tags": ["searchSuggestions"]
+      }
+    },
     "/searchSuggestions/{id}": {
       "get": {
         "operationId": "getSearchSuggestion",
@@ -20924,6 +21037,11 @@
             "items": {
               "$ref": "#/components/schemas/SearchSuggestions_History"
             }
+          },
+          "query": {
+            "type": "string",
+            "description": "search query the suggestions were produced for",
+            "example": "moby dick"
           },
           "suggestions": {
             "type": "array",

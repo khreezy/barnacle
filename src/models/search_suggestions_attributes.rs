@@ -17,6 +17,9 @@ pub struct SearchSuggestionsAttributes {
     /// Suggestions from search history
     #[serde(rename = "history", skip_serializing_if = "Option::is_none")]
     pub history: Option<Vec<models::SearchSuggestionsHistory>>,
+    /// search query the suggestions were produced for
+    #[serde(rename = "query", skip_serializing_if = "Option::is_none")]
+    pub query: Option<String>,
     /// Suggested search queries
     #[serde(rename = "suggestions", skip_serializing_if = "Option::is_none")]
     pub suggestions: Option<Vec<models::SearchSuggestionsSuggestions>>,
@@ -29,6 +32,7 @@ impl SearchSuggestionsAttributes {
     pub fn new(tracking_id: String) -> SearchSuggestionsAttributes {
         SearchSuggestionsAttributes {
             history: None,
+            query: None,
             suggestions: None,
             tracking_id,
         }
